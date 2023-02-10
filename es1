@@ -1,0 +1,44 @@
+#include<stdio.h>
+#define N 4
+int aux(int M[][N],int riga,int colonna,int h,int k);
+int contaMatriciConZeri(int M[][N],int h,int k);
+
+int main(){
+    int M[N][N]={0, 0, 0, 1,
+                 1, 1, 1, 0,
+                 0, 1, 1, 0,
+                 0, 1, 1, 1};
+    int num,h,k;
+    //TODO: invocazioni funzioni
+    printf("Qual è la lunghezza del lato della sottomatrice?\n");
+    scanf("%d",&h);
+    printf("Quanti zeri deve avere per essere contata?\n");
+    scanf("%d",&k);
+    num=contaMatriciConZeri(M, h, k);
+    //TODO: STAMPA --> ATTENZIONE: STAMPA CONSENTITA SOLO QUI <--
+    printf("In M ci sono %d sottomatrici %dx%d aventi %d valori uguali a 0\n",num,h,h,k);
+    return 0;
+}
+int contaMatriciConZeri(int M[][N],int h,int k)
+{
+    int r,c,cont=0;
+    for (r=0; r<(N-h+1); r++) {
+        for (c=0; c<(N-h+1); c++) {
+            if(aux(M, r, c, h, k)==k){
+                cont++;
+            }
+        }
+    }
+    return cont;
+}
+int aux(int M[][N],int riga,int colonna,int h,int k)
+{
+    int r,c,cont=0;
+    for (r=riga; r<riga+h; r++) {
+        for (c=colonna; c<colonna+h; c++) {
+            if(M[r][c]==0)
+                    cont++;
+        }
+    }
+    return cont;
+}
